@@ -24,7 +24,7 @@ void output(void* p, void* data, ullong len) {
 }
 
 ullong get_base(void* p) {
-	return read_cr3();
+	return read_cr3_pa();
 }
 
 ullong* read_page(void* p, ullong address) {
@@ -40,14 +40,14 @@ static int do_ptdump(struct seq_file *m, void* v) {
 }
 
 static int ptdump_open(struct inode *inode, struct file *fp) {
-	return single_open(fp, do_ptdump, PDE_DATA(inode));
+	return single_open(fp, do_ptdump, pde_data(inode));
 }
 
-static const struct file_operations ptdump_fops = {
-	.open    = ptdump_open,
-	.read    = seq_read,
-	.llseek  = seq_lseek,
-	.release = single_release,
+static const struct proc_ops ptdump_fops = {
+	.proc_open    = ptdump_open,
+	.proc_read    = seq_read,
+	.proc_lseek  = seq_lseek,
+	.proc_release = single_release,
 };
 
 static struct proc_dir_entry *proc_page_table0;
