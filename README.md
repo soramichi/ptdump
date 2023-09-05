@@ -2,6 +2,8 @@
 
 Dump page tables on various OSes and analyze them.
 
+**This version is modified by Soramichi Akiyama so that it works on Linux version 6.**
+
 ## Dumping
 
 Currently only dumping of x86-64 page tables is supported, and only on Linux
